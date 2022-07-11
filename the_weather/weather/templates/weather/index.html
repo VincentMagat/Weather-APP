@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
+</head>
+<style>
+   
+    html, body {
+        margin:0;
+        height: 100%;
+        overflow: hidden;
+        
+        }
+    
+    .bg-container {
+        background-image: url("https://i.pinimg.com/originals/26/be/b0/26beb09153b8df233d82e66bef3edfbb.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position:center center;
+        width:100%;
+        height:100;
+        border: 5px solid rgba(255, 255, 255, 0);
+        box-sizing: border-box;
+    }
+    h1 {
+        text-align: center;
+    }
+    .heading{
+        color:rgba(253, 253, 253, 0);
+        font: 15px arial, sans-serif;
+        font-weight:bold;
+        -webkit-text-stroke: 2px rgb(255, 255, 255);
+        position: relative;
+        top:20px;
+
+    }
+    .columns1 {
+        background-color:rgba(236, 236, 236, 0.26);
+    }
+</style>
+<body class = "bg-container" >
+    <section>
+        <div>
+            <div>
+                <h1 class="heading">
+                 <font size="+3";>Weather APP</font>
+                </h1>
+                
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="field has-addons">
+                            <div class="control is-expanded">
+                                {{ form.name }}
+                            </div>
+                            <div class="control">
+                                <button class="button is-link">
+                                    Search City
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section" >
+        <div class="container" >
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for weather in weather_data %}
+                    <div class="box columns1" style=color:rgb(21,58,13) 0.829)>
+                        <article class="media">
+                            <div class="media-left">
+                                <figure>
+                                    <img src="https://www.freeiconspng.com/thumbs/weather-icon-png/weather-icon-png-25.png" alt="Image" width="50" height="50">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span style=color:rgb(23,36,218) class="title">{{ weather.city }}</span>
+                                        <br>
+                                        <span style=color:rgb(0,0,0) class="subtitle">{{ weather.temperature }}° F</span>
+                                        <br> {{ weather.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+    </footer>
+</body>
+</html>
